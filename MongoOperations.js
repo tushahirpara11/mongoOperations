@@ -75,4 +75,20 @@ db.movies.find({ "franchise": "The Hobbit" }).pretty();
 db.movies.find({ "year": { $lte: 2000 } }).pretty();
 
 //6. get all movies released before the year 2000 or after 2010
-db.movies.find({ $or: [{ "year": { $lt: 2000 } },{ "year": { $gt: 2010 } }] }).pretty();
+db.movies.find({ $or: [{ "year": { $lt: 2000 } }, { "year": { $gt: 2010 } }] }).pretty();
+//=============================================================================================
+
+//Update Documents
+
+/* 1. add a synopsis to "The Hobbit: An Unexpected Journey" : "A reluctant hobbit, Bilbo Baggins, sets out to the
+Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon
+ Smaug." */
+db.movies.update({ "title": "The Hobbit: An Unexpected Journey" }, { $set: { "synopsis": "A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug." } }, { multi: true });
+
+/* 2. add a synopsis to "The Hobbit: The Desolation of Smaug" : "The dwarves, along with Bilbo Baggins and Gandalf the Grey
+, continue their quest to reclaim Erebor, their homeland, from Smaug. Bilbo Baggins is in possession of a mysterious and 
+magical ring." */
+db.movies.update({ "title": "The Hobbit: The Desolation of Smaug" }, { $set: { "synopsis": "The dwarves, along with Bilbo Baggins and Gandalf the Grey, continue their quest to reclaim Erebor, their homeland, from Smaug. Bilbo Baggins is in possession of a mysterious and magical ring." } }, { multi: true });
+
+//3. add an actor named "Samuel L. Jackson" to the movie "Pulp Fiction"
+db.movies.update({ "title": "Pulp Fiction" }, { $push: { "actor": "Samuel L. Jackson" } }, { multi: true });
