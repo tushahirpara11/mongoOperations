@@ -72,7 +72,7 @@ db.movies.find({ "actors": "Brad Pitt" }).pretty();
 db.movies.find({ "franchise": "The Hobbit" }).pretty();
 
 //5. get all movies released in the 90s
-db.movies.find({ "year": { $lte: 2000 } }).pretty();
+db.movies.find({ $and: [{ "year": { $gte: 1990 } }, { "year": { $lte: 2000 } }] }).pretty();
 
 //6. get all movies released before the year 2000 or after 2010
 db.movies.find({ $or: [{ "year": { $lt: 2000 } }, { "year": { $gt: 2010 } }] }).pretty();
@@ -92,3 +92,20 @@ db.movies.update({ "title": "The Hobbit: The Desolation of Smaug" }, { $set: { "
 
 //3. add an actor named "Samuel L. Jackson" to the movie "Pulp Fiction"
 db.movies.update({ "title": "Pulp Fiction" }, { $push: { "actor": "Samuel L. Jackson" } }, { multi: true });
+
+//Text Search
+
+/*1. find all movies that have a synopsis that contains the word "Bilbo"  */
+db.movies.find({ "synopsis": { $regex: "Bilbo" } })
+
+/*2. find all movies that have a synopsis that contains the word "Gandalf" */
+db.movies.find({ "synopsis": { $regex: "Gandalf" } })
+
+/*3. find all movies that have a synopsis that contains the word "Bilbo" and not the word "Gandalf" */
+db.movies.find({ $and: [{ "synopsis": { $regex: "Bilbo" } }, { "synopsis": { $not: /Gandalf/ } }] })
+
+/*4. find all movies that have a synopsis that contains the word "dwarves" or "hobbit" */
+db.movies.find({ $or: [{ "synopsis": { $regex: "dwarves" } }, { "synopsis": { $regex: "hobbit" } }] })
+
+/*5. find all movies that have a synopsis that contains the word "gold" and "dragon" */
+db.movies.find({ $and: [{ "title": { $regex: "gold" } }, { "title": { $regex: "dragon" } }] })
