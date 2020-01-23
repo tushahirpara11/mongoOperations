@@ -109,3 +109,11 @@ db.movies.find({ $or: [{ "synopsis": { $regex: "dwarves" } }, { "synopsis": { $r
 
 /*5. find all movies that have a synopsis that contains the word "gold" and "dragon" */
 db.movies.find({ $and: [{ "title": { $regex: "gold" } }, { "title": { $regex: "dragon" } }] })
+
+// Delete Documents
+
+/*1. delete the movie "Pee Wee Herman's Big Adventure" */
+db.movies.remove({ "title": "Pee Wee Herman's Big Adventure" });
+
+/*2. delete the movie "Avatar" */
+db.movies.remove({ "title": "Avatar" });
