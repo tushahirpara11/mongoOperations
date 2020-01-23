@@ -117,3 +117,100 @@ db.movies.remove({ "title": "Pee Wee Herman's Big Adventure" });
 
 /*2. delete the movie "Avatar" */
 db.movies.remove({ "title": "Avatar" });
+
+//User Collection
+db.user.insertMany([{
+  "username": "GoodGuyGreg",
+  "first_name": "Good Guy",
+  "last_name": "Greg"
+},
+{
+  "username": "ScumbagSteve",
+  "full_name": {
+    "first": "Scumbag",
+    "last": "Steve"
+  }
+}]);
+
+// Insert the following documents into a posts collection
+db.posts.insertMany([{
+  "username": "GoodGuyGreg",
+  "title": "Passes out at party",
+  "body": "Wakes up early and cleans house"
+},
+{
+  "username": "GoodGuyGreg",
+  "title": "Steals your identity",
+  "body": "Raises your credit score"
+},
+{
+  "username": "GoodGuyGreg",
+  "title": "Reports a bug in your code",
+  "body": "Sends you a Pull Request"
+},
+{
+  "username": "ScumbagSteve",
+  "title": "Borrows something",
+  "body": "Sells it"
+},
+{
+  "username": "ScumbagSteve",
+  "title": "Borrows everything",
+  "body": "The end"
+},
+{
+  "username": "ScumbagSteve",
+  "title": "Forks your repo on github",
+  "body": "Sets to private"
+}]);
+
+
+db.comments.insertMany([{
+  "username": "GoodGuyGreg",
+  "comment": "Hope you got a good deal!",
+  "post": ObjectId("5e297d76fb4fc67c6966becd")
+},
+{
+  "username": "GoodGuyGreg",
+  "comment": "What's mine is yours!",
+  "post": ObjectId("5e297d76fb4fc67c6966bece")
+},
+{
+  "username": "GoodGuyGreg",
+  "comment": "Don't violate the licensing agreement!",
+  "post": ObjectId("5e297d76fb4fc67c6966becf")
+},
+{
+  "username": "ScumbagSteve",
+  "comment": "It still isn't clean",
+  "post": ObjectId("5e297d76fb4fc67c6966beca")
+},
+{
+  "username": "ScumbagSteve",
+  "comment": "Denied your PR cause I found a hack",
+  "post": ObjectId("5e297d76fb4fc67c6966becc")
+}]);
+
+//1. find all users
+db.user.find({});
+
+//2. find all posts
+db.posts.find({})
+
+//3. find all posts that was authored by "GoodGuyGreg"
+db.posts.find({ "username": "GoodGuyGreg" })
+
+//4. find all posts that was authored by "ScumbagSteve"
+db.posts.find({ "username": "GoodGuyGreg" })
+
+//5. find all comments
+db.comment.find();
+
+//6. find all comments that was authored by "GoodGuyGreg"
+db.comments.find({ "username": "GoodGuyGreg" })
+
+//7. find all comments that was authored by "ScumbagSteve"
+db.comments.find({ "username": "ScumbagSteve" })
+
+//8. find all comments belonging to the post "Reports a bug in your code"
+db.posts.find({ "title": "Reports a bug in your code" });
